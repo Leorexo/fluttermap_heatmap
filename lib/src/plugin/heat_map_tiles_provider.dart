@@ -18,7 +18,7 @@ class HeatMapTilesProvider extends TileProvider {
       {required this.dataSource, required this.heatMapOptions});
 
   @override
-  ImageProvider getImage(TileCoordinates coords, TileLayer options) {
+  ImageProvider getImage(Coords coords, TileLayer options) {
     var tileSize = options.tileSize;
 
     // disable zoom level 0 for now. ned to refactor _filterData
@@ -39,7 +39,7 @@ class HeatMapTilesProvider extends TileProvider {
     return (math.exp(angle) - math.exp(-angle)) / 2;
   }
 
-  _filterData(TileCoordinates coords, TileLayer options) {
+  _filterData(Coords coords, TileLayer options) {
     List<DataPoint> filteredData = [];
     final zoom = coords.z;
     var scale = coords.z / 22 * 1.22;
@@ -100,7 +100,7 @@ class HeatMapTilesProvider extends TileProvider {
 
   /// extract bounds from tile coordinates. An optional [buffer] can be passed to expand the bounds
   /// to include a buffer. eg. a buffer of 0.5 would add a half tile buffer to all sides of the bounds.
-  LatLngBounds _bounds(TileCoordinates coords, [double buffer = 0]) {
+  LatLngBounds _bounds(Coords coords, [double buffer = 0]) {
     var sw = LatLng(tile2Lat(coords.y + 1 + buffer, coords.z),
         tile2Lon(coords.x - buffer, coords.z));
     var ne = LatLng(tile2Lat(coords.y - buffer, coords.z),
