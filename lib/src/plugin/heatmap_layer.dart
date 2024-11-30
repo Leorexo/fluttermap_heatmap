@@ -1,3 +1,12 @@
+/*
+ * @Author: ZhouHongyi (leorexo@qq.com)
+ * @Date: 2024-11-30 14:25:09
+ * @LastEditTime: 2024-11-30 14:44:53
+ * @FilePath: \fluttermap_heatmap\lib\src\plugin\heatmap_layer.dart
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by 环球信士(http://www.hqxs.net), All Rights Reserved. 
+ */
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -8,15 +17,13 @@ class HeatMapLayer extends StatefulWidget {
   final HeatMapOptions heatMapOptions;
   final HeatMapDataSource heatMapDataSource;
   final Stream<void>? reset;
-  final TileDisplay tileDisplay;
 
   HeatMapLayer(
       {super.key,
       HeatMapOptions? heatMapOptions,
       required this.heatMapDataSource,
       List<WeightedLatLng>? initialData,
-      this.reset,
-      this.tileDisplay = const TileDisplay.fadeIn()})
+      this.reset})
       : heatMapOptions = heatMapOptions ?? HeatMapOptions();
 
   @override
@@ -64,7 +71,6 @@ class _HeatMapLayerState extends State<HeatMapLayer> {
           backgroundColor: Colors.transparent,
           tileSize: 256,
           urlTemplate: pseudoUrl,
-          tileDisplay: widget.tileDisplay,
           tileProvider: HeatMapTilesProvider(
               heatMapOptions: widget.heatMapOptions,
               dataSource: widget.heatMapDataSource)),
